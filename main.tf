@@ -135,6 +135,7 @@ resource "aws_instance" "this" {
 
   tags        = merge({ "Name" = var.name }, var.tags)
   volume_tags = var.enable_volume_tags ? merge({ "Name" = var.name }, var.volume_tags) : null
+  monitoring = true
 }
 
 resource "aws_spot_instance_request" "this" {
