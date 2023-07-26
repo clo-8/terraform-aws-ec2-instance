@@ -133,7 +133,10 @@ resource "aws_instance" "this" {
     delete = lookup(var.timeouts, "delete", null)
   }
 
-  tags        = merge({ "Name" = var.name }, var.tags)
+  tags = merge({ "Name" = var.name }, var.tags, {
+    git_org  = "clo-8"
+    git_repo = "terraform-aws-ec2-instance"
+  })
   volume_tags = var.enable_volume_tags ? merge({ "Name" = var.name }, var.volume_tags) : null
 }
 
@@ -275,6 +278,9 @@ resource "aws_spot_instance_request" "this" {
     delete = lookup(var.timeouts, "delete", null)
   }
 
-  tags        = merge({ "Name" = var.name }, var.tags)
+  tags = merge({ "Name" = var.name }, var.tags, {
+    git_org  = "clo-8"
+    git_repo = "terraform-aws-ec2-instance"
+  })
   volume_tags = var.enable_volume_tags ? merge({ "Name" = var.name }, var.volume_tags) : null
 }

@@ -28,7 +28,10 @@ module "vpc" {
   private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
   database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
 
-  tags = local.tags
+  tags = merge(local.tags, {
+    git_org  = "clo-8"
+    git_repo = "terraform-aws-ec2-instance"
+  })
 }
 
 data "aws_ami" "amazon_linux" {
@@ -53,7 +56,10 @@ module "security_group" {
   ingress_rules       = ["http-80-tcp", "all-icmp"]
   egress_rules        = ["all-all"]
 
-  tags = local.tags
+  tags = merge(local.tags, {
+    git_org  = "clo-8"
+    git_repo = "terraform-aws-ec2-instance"
+  })
 }
 
 ################################################################################
@@ -85,5 +91,8 @@ resource "aws_ebs_volume" "this" {
   availability_zone = local.availability_zone
   size              = 1
 
-  tags = local.tags
+  tags = merge(local.tags, {
+    git_org  = "clo-8"
+    git_repo = "terraform-aws-ec2-instance"
+  })
 }
